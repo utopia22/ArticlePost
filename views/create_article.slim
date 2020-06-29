@@ -1,0 +1,23 @@
+h1.my-3 記事投稿画面
+
+/ 追加
+form method='post' action='/article_post' enctype='multipart/form-data'
+  .form-group
+     input.form-control type="text" name="title" value="#{@post&.title}" placeholder="タイトル"
+  .form-group
+     textarea.form-control type="text" name="body" cols="50" rows="16" placeholder="記事を入力" #{@post&.body}
+  p ・カテゴリーを選択
+  - @categories.each do |category|
+     .form-check.form-check-inline
+      - if @post && category.id == @post.category_id
+         input.form-check-input type="radio" name="category_id" value="#{category.id}" id="radio_#{category.id}" checked="checked"
+      - else
+         input.form-check-input type="radio" name="category_id" value="#{category.id}" id="radio_#{category.id}"
+         label.form-check-label for="radio_#{category.id}"= category.name
+
+  p.mt-3 ・サムネイル画像
+  input#thumbnail type="file" name="file" accept="image/*"
+  br
+  .d-flex.my-4
+      input.btn.btn-primary.mr-2 type="submit" value="プレビュー" name="prev"
+      input.btn.btn-primary      type="submit" value="投稿"

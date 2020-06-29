@@ -3,29 +3,49 @@ require "sinatra/reloader"
 
 get '/' do
   'hello world by sinatra'
-  erb :index
+  slim :index
 end
 
 get '/create_article' do
   @categories = Category.all
-   erb :create_article
+   slim :create_article
 end
 
 post '/article_post' do
+
+  file = params[:file]
+  thumbnail_name = file ? file[:filename] : params[:thumbnail]
+
   @post = Post.new(
     category_id: params[:category_id],
     title:       params[:title],
     body:        params[:body],
-    thumbnail:   params[:file][:filename]
+    thumbnail:   thumbnail_name
   )
-  # DBに保存
-  @post.save
 
-  # 画像をpublic/imgに保存
-  File.open("public/img/#{@post.thumbnail}", 'wb') do |f|
-    f.write(params[:file][:tempfile].read)
+
+  if file
+    File.open("public/img/#{@post.thumbnail}", 'wb') do |f|
+      f.write(params[:file][:tempfile].read)
+    end
   end
-  redirect "/articles/#{@post.id}"
+
+  if params[:prev]
+
+    @category_name = Category.find(@post.category_id).name
+
+    slim :preview
+  elsif params[:back]
+     File.delete("public/img/#{params[:thumbnail]}")
+     @categories = Category.all
+     slim :create_article
+
+  else
+
+    @post.save
+      redirect "/articles/#{@post.id}"
+    end
+
 end
 
 get '/articles/:id' do
@@ -34,5 +54,5 @@ get '/articles/:id' do
   # 投稿された記事のカテゴリーidと同じカテゴリーを探し、カテゴリー名を取得
   @category_name = Category.find(@post.category_id).name
 
-  erb :articles
+  slim :articles
 end

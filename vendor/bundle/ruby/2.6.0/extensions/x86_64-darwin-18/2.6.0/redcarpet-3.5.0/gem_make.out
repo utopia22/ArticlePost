@@ -1,5 +1,5 @@
 current directory: /Users/sekishinya/Desktop/Article-Post/vendor/bundle/ruby/2.6.0/gems/redcarpet-3.5.0/ext/redcarpet
-/Users/sekishinya/.rbenv/versions/2.6.5/bin/ruby -I /Users/sekishinya/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200625-9368-4fwaaw.rb extconf.rb
+/Users/sekishinya/.rbenv/versions/2.6.5/bin/ruby -I /Users/sekishinya/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200629-2045-oic2rb.rb extconf.rb
 creating Makefile
 
 current directory: /Users/sekishinya/Desktop/Article-Post/vendor/bundle/ruby/2.6.0/gems/redcarpet-3.5.0/ext/redcarpet
@@ -74,4 +74,4 @@ linking shared-object redcarpet.bundle
 
 current directory: /Users/sekishinya/Desktop/Article-Post/vendor/bundle/ruby/2.6.0/gems/redcarpet-3.5.0/ext/redcarpet
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 redcarpet.bundle ./.gem.20200625-9368-12v849z
+/usr/bin/install -c -m 0755 redcarpet.bundle ./.gem.20200629-2045-osu9pq

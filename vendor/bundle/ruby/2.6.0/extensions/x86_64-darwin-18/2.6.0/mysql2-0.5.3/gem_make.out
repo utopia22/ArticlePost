@@ -1,5 +1,5 @@
 current directory: /Users/sekishinya/Desktop/Article-Post/vendor/bundle/ruby/2.6.0/gems/mysql2-0.5.3/ext/mysql2
-/Users/sekishinya/.rbenv/versions/2.6.5/bin/ruby -I /Users/sekishinya/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200625-9368-1kt35e5.rb extconf.rb --with-ldflags\=-L/usr/local/opt/openssl/lib --with-cppflags\=-I/usr/local/opt/openssl/include
+/Users/sekishinya/.rbenv/versions/2.6.5/bin/ruby -I /Users/sekishinya/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200629-2045-si0ufw.rb extconf.rb --with-ldflags\=-L/usr/local/opt/openssl/lib --with-cppflags\=-I/usr/local/opt/openssl/include
 checking for rb_absint_size()... yes
 checking for rb_absint_singlebit_p()... yes
 checking for rb_wait_for_single_fd()... yes
@@ -41,4 +41,4 @@ linking shared-object mysql2/mysql2.bundle
 
 current directory: /Users/sekishinya/Desktop/Article-Post/vendor/bundle/ruby/2.6.0/gems/mysql2-0.5.3/ext/mysql2
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 mysql2.bundle ./.gem.20200625-9368-131hdo5/mysql2
+/usr/bin/install -c -m 0755 mysql2.bundle ./.gem.20200629-2045-18362wn/mysql2
