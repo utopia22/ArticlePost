@@ -1,6 +1,17 @@
-h1.my-3 記事投稿画面
+.d-flex.justify-content-between.my-3
 
-/ 追加
+  h1 記事投稿画面
+
+  form method='post' action='/logout'
+    input type="hidden" name="_method" value="DELETE"
+    input.btn.btn-secondary type="submit" value="ログアウト"
+
+- if @post && @post.errors
+  ul#error_explanation
+    - @post.errors.full_messages.each do |message|
+      li.text-danger= message
+
+
 form method='post' action='/article_post' enctype='multipart/form-data'
   .form-group
      input.form-control type="text" name="title" value="#{@post&.title}" placeholder="タイトル"

@@ -12,9 +12,6 @@ table.table.table-hover
       th カテゴリー
       td= @category_name
     tr
-      th 本文
-      td= @post.body
-    tr
       th サムネイル
       td
         img.img-fluid width="300" height="150" src="/img/#{@post.thumbnail}"
@@ -24,3 +21,8 @@ table.table.table-hover
     tr
       th 更新日時
       td= @post.updated_at
+      td
+
+
+  div
+     == markdown(@post.body)

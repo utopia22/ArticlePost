@@ -1,17 +1,24 @@
+enable :sessions
+enable :method_override
+
 require "sinatra"
 require "sinatra/reloader"
 
 get '/' do
-  'hello world by sinatra'
+  @posts = Post.all
+
   slim :index
 end
 
 get '/create_article' do
+
   @categories = Category.all
    slim :create_article
 end
 
 post '/article_post' do
+  login_required
+  redirect '/create_article' unless params[:csrf_token] == session[:csrf_token]
 
   file = params[:file]
   thumbnail_name = file ? file[:filename] : params[:thumbnail]
@@ -23,6 +30,7 @@ post '/article_post' do
     thumbnail:   thumbnail_name
   )
 
+if @post.valid?
 
   if file
     File.open("public/img/#{@post.thumbnail}", 'wb') do |f|
@@ -45,14 +53,47 @@ post '/article_post' do
     @post.save
       redirect "/articles/#{@post.id}"
     end
+  else
 
+     @categories = Category.all
+     slim :create_article
+   end
 end
 
 get '/articles/:id' do
-  # DBから:idの記事番号の記事を探して@postに入れる
+
   @post = Post.find_by(id: params[:id])
-  # 投稿された記事のカテゴリーidと同じカテゴリーを探し、カテゴリー名を取得
+
   @category_name = Category.find(@post.category_id).name
 
   slim :articles
+end
+
+post '/articles/delete/:id' do
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect '/'
+end
+
+get '/login' do
+  slim :login
+end
+
+post '/login' do
+  user = User.find_by(name: params[:name])
+
+  if user&.authenticate(params[:password])
+    session[:user_id] = user.id
+
+    redirect '/'
+  else
+
+    slim :login
+  end
+end
+
+delete '/logout' do
+  session.clear
+
+  redirect '/login'
 end

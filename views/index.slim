@@ -1,1 +1,31 @@
-'hello world by sinatra'
+.d-flex.justify-content-between.my-3
+   h1 記事投稿画面
+   form method='post' action='/logout'
+     input type="hidden" name="_method" value="DELETE"
+     input.btn.btn-secondary type="submit" value="ログアウト"
+
+
+
+a href='/create_article' 投稿
+
+
+
+table.table.table-hover
+  thead.thead-default
+    tr
+      th サムネイル
+      th タイトル
+      th 投稿日
+      th カテゴリー
+      th
+  tbody
+    - @posts.each do |post|
+        tr
+          td
+            img src="img/#{post.thumbnail}" width="200px" height="150px"
+          td
+            a href="articles/#{post.id}" = post.title
+          td= post.created_at
+          td= Category.find(post.category_id).name
+          td
+          

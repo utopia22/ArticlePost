@@ -9,16 +9,16 @@ table.table.table-hover
       th カテゴリー
       td= @category_name
     tr
-      th 本文
-      td= @post.body
-    tr
       th サムネイル
       td
         img.img-fluid width="300" height="150" src="/img/#{@post.thumbnail}"
 
-/ 隠しフォーム
+div
+   == markdown(@post.body)
+
+
 form method='post' action='/article_post'
-  / 値をそれぞれ設定
+
   input type="hidden" name="title"       value="#{@post.title}"
   input type="hidden" name="body"        value="#{@post.body}"
   input type="hidden" name="category_id" value="#{@post.category_id}"
