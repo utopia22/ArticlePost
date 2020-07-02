@@ -4,6 +4,7 @@ enable :method_override
 require "sinatra"
 require "sinatra/reloader"
 
+
 get '/' do
   @posts = Post.all
 
@@ -11,7 +12,7 @@ get '/' do
 end
 
 get '/create_article' do
-
+  login_required
   @categories = Category.all
    slim :create_article
 end
@@ -93,6 +94,7 @@ post '/login' do
 end
 
 delete '/logout' do
+  login_required
   session.clear
 
   redirect '/login'
